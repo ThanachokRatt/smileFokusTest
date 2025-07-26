@@ -17,9 +17,24 @@ class AppFonts {
 class GetString {
   //Login screen
   static const String appTitle = "smileReward";
+  static const String smile = "smile";
+  static const String reward = "Reward";
   static const String email = "Email";
   static const String password = "Password";
   static const String signIn = "Sign In";
+
+  static const String smileEmail = 'smile@smilefokus.com';
+  static const String smilePassword = '11111111';
+
+  static const String loginEmailRequired = "Please enter your email.";
+  static const String loginEmailInvalid = "Invalid email format.";
+  static const String loginPasswordRequired = "Please enter your password.";
+  static const String loginPasswordInvalid = "Password must be 8 digits.";
+  static const String loginInvalidCredentials = "Incorrect email or password.";
+
+  //Dialog
+  static const String alertTitle = "Alert";
+  static const String close = "close";
 }
 
 // App Colors Const
@@ -29,7 +44,8 @@ const Color kLightGrayColor = Color(0xFFECECEC);
 const Color kSolidGrayColor = Color(0xFF434343);
 const Color kSolidBlack = Color(0xFF000000);
 
-const Color kPrimaryOrange = Color(0xFFEB6C00);
+const Color kPrimaryOrange = Color(0xFFFF7F09);
+const Color kPrimaryOrangeTwo = Color(0xFFF79745);
 const Color kPrimaryYellow = Color(0xFFFFA717);
 const Color kPrimaryYellowTwo = Color(0xFFE88A33);
 
