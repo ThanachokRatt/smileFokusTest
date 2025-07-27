@@ -12,10 +12,12 @@ class MainTabScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Declare Bloc
     return BlocProvider(
       create: (context) => MainTabBarCubit(),
       child: BlocBuilder<MainTabBarCubit, MainTabBarState>(
         builder: (context, state) {
+          /// Set Default screen = HomeScreen
           int selectedIndex = 0;
           if (state is TabBarSelected) {
             selectedIndex = state.selectedIndex;
@@ -33,6 +35,7 @@ class MainTabScreen extends StatelessWidget {
                 backgroundColor: kWhiteColor,
                 currentIndex: selectedIndex,
                 onTap: (index) {
+                  /// Update select tab event to switch screen
                   context.read<MainTabBarCubit>().selectTab(index);
                 },
                 selectedItemColor: kPrimaryOrange,

@@ -21,6 +21,7 @@ class UserInfoHeader extends StatelessWidget {
       padding: EdgeInsets.only(bottom: AppPaddings.large),
       child: Row(
         children: [
+          /// Name and Point Ui
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,7 +35,7 @@ class UserInfoHeader extends StatelessWidget {
               ),
             ],
           ),
-
+          ///Sign out Ui
           Expanded(
             child: CustomButton(
               padding: EdgeInsets.only(left: AppPaddings.large),

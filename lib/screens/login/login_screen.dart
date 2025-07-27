@@ -24,18 +24,23 @@ class LoginScreen extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         body: GestureDetector(
           onTap: () {
+            //Hide keyboard when tap ui
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Center(
             child: BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
+                ///Show Dialog with error message
                 if (state is LoginErrorState) {
                   CustomDialog.showDialogInfo(
                     context: context,
                     alertDescription: state.errorMessages,
                   );
                 }
+
+                /// Login Success and navigate to MainTabScreen
                 if (state is LoginSuccessState) {
+                  //set email & password to empty
                   _usernameController.text = '';
                   _passwordController.text = '';
                   Navigator.push(
@@ -48,19 +53,19 @@ class LoginScreen extends StatelessWidget {
                 child: SafeArea(
                   child: Column(
                     children: [
-                      //Title
+                      ///Title Ui
                       buildLoginTitle(),
                       SizedBox(height: AppPaddings.large),
 
-                      //Username TextField
+                      ///Username TextField Ui
                       _buildEmailTextField(),
                       SizedBox(height: AppPaddings.small),
 
-                      //Password TextField
+                      ///Password TextField Ui
                       buildPasswordTextField(),
                       SizedBox(height: AppPaddings.superLarge),
 
-                      //Sign In Button
+                      ///Sign In ButtonUi
                       _buildSignInButton(context),
                     ],
                   ),

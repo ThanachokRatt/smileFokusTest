@@ -8,7 +8,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
-    //Function Validate Credentials
+    ///Function Validate Credentials
     on<LoginPressedEvent>((event, emit) async {
       emit(LoginInitial());
 
@@ -39,7 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         return;
       }
 
-      //Set SharedPreferences
+      ///Set SharedPreferences
       const int defaultPoint = 10000;
       Configuration.setIsLogin(true);
       Configuration.setName(event.username);

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smile_fokus_test/Utils/app_constants.dart';
 import 'package:smile_fokus_test/Utils/app_formatter.dart';
+import 'package:smile_fokus_test/bloc/wish_list/wish_lish_bloc.dart';
 import 'package:smile_fokus_test/extension/text_styles.dart';
 import 'package:smile_fokus_test/models/home/reward_item_model.dart';
 import 'package:smile_fokus_test/screens/reward_detail/reward_detail_screen.dart';
@@ -12,6 +14,7 @@ class RewardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///Reward List Ui
     return Expanded(
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -23,11 +26,14 @@ class RewardList extends StatelessWidget {
         itemCount: modelList.length,
         itemBuilder: (context, index) {
           final model = modelList![index];
+          ///Reward card item Ui
           return RewardCard(
             name: model.name,
             points: model.rewardPoints,
             imageUrl: model.imageUrl,
+            isFavorite: _isFavorite(context, model),
             onPressedCard: () {
+              /// Navigate to Reward detail screen
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -35,13 +41,24 @@ class RewardList extends StatelessWidget {
                 ),
               );
             },
+            ///Update wish list
             onPressedLike: () {
-              print('like Id = ${model.id}');
+              context.read<WishListBloc>().add(UpdateWishListEvent(model));
             },
           );
         },
       ),
     );
+  }
+
+  ///check display favorite
+  bool _isFavorite(BuildContext context, RewardItem model) {
+    final wishListState = context.watch<WishListBloc>().state;
+
+    if (wishListState is WishListUpdatedState) {
+      return wishListState.modelList.any((item) => item.id == model.id);
+    }
+    return false;
   }
 }
 
@@ -49,6 +66,7 @@ class RewardCard extends StatelessWidget {
   final String name;
   final int points;
   final String imageUrl;
+  final bool isFavorite;
   final void Function()? onPressedCard;
   final void Function()? onPressedLike;
   const RewardCard({
@@ -56,6 +74,7 @@ class RewardCard extends StatelessWidget {
     required this.name,
     required this.points,
     required this.imageUrl,
+    required this.isFavorite,
     required this.onPressedCard,
     required this.onPressedLike,
   });
@@ -74,6 +93,7 @@ class RewardCard extends StatelessWidget {
               aspectRatio: 1,
               child: Stack(
                 children: [
+                  ///Build Image form link
                   ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(8),
@@ -85,6 +105,7 @@ class RewardCard extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
+                  ///Build Icon favorite
                   Positioned(
                     top: 8,
                     right: 8,
@@ -92,9 +113,9 @@ class RewardCard extends StatelessWidget {
                       backgroundColor: Colors.black,
                       radius: 18,
                       child: IconButton(
-                        icon: const Icon(
-                          Icons.favorite_border,
-                          color: Colors.white,
+                        icon: Icon(
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: isFavorite ? kPrimaryOrange : kWhiteColor,
                           size: 18,
                         ),
                         onPressed: onPressedLike,
@@ -105,7 +126,7 @@ class RewardCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: AppPaddings.small),
-
+            ///Build Name
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppPaddings.small),
               child: Text(
@@ -116,7 +137,7 @@ class RewardCard extends StatelessWidget {
                 softWrap: true,
               ),
             ),
-
+            ///Build points
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Text(

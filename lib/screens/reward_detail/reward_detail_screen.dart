@@ -16,7 +16,10 @@ class RewardDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Check current point from state
     final currentPoint = context.watch<PointBloc>().state.points;
+
+    //Check isDisable redeem button from point
     return BlocProvider(
       create: (context) {
         final cubit = DisableRedeemBtnCubit();
@@ -31,11 +34,16 @@ class RewardDetailScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              ///Build Reward Image Ui
               _buildRewardImage(model: model),
+
+              ///Build Reward Information Ui
               RewardInformation(model: model),
             ],
           ),
         ),
+
+        ///Build Redeem button Ui
         bottomNavigationBar: _buildBottomNavigatorBar(model: model),
       ),
     );
@@ -55,15 +63,20 @@ class _buildBottomNavigatorBar extends StatelessWidget {
         padding: EdgeInsets.only(bottom: AppPaddings.medium),
         child: BlocBuilder<DisableRedeemBtnCubit, DisableRedeemBtnState>(
           builder: (context, state) {
+            ///Check Disable for display button
             bool isDisable = false;
 
             if (state is DisableRedeemState) {
               isDisable = state.isDisable;
             }
+
+            ///build Redeem button ui
             return CustomButton(
               text: GetString.redeem,
+              //Check isDisable if it true display gray background color
               bgColor: isDisable ? kPrimaryGray : kPrimaryOrange,
               onPressed: () {
+                //Check isDisable if it true nothing happening
                 isDisable
                     ? null
                     : CustomDialog.showConfirmDialog(

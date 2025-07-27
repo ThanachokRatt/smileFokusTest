@@ -13,7 +13,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Check current point.
     final currentPoint = context.watch<PointBloc>().state.points;
+
+    //Retrieve reward item list mock data.
     return BlocProvider(
       create: (context) => HomeBloc()..add(HomeFetchRewardItemListEvent()),
       child: BlocBuilder<HomeBloc, HomeState>(
@@ -31,6 +34,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  ///Build RewardList Ui
                   if (modelList != null && userName.isNotEmpty) ...[
                     UserInfoHeader(
                       userName: userName,
@@ -38,6 +42,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     RewardList(modelList: modelList),
                   ] else
+                    ///Build ErrorMessage Ui
                     _buildErrorMessage(context),
                 ],
               ),
@@ -48,13 +53,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Padding _buildErrorMessage(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.width / 1.2),
+  Expanded _buildErrorMessage(BuildContext context) {
+    return Expanded(
       child: Center(
         child: Text(
-          GetString.errorMessage,
-          style: SetStyle.sarabunBold(AppFonts.large),
+          GetString.errorHomeMessage,
+          style: SetStyle.sarabunRegular(AppFonts.large),
         ),
       ),
     );

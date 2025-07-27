@@ -4,6 +4,7 @@ import 'package:smile_fokus_test/Utils/app_constants.dart';
 import 'package:smile_fokus_test/extension/text_styles.dart';
 
 class CustomDialog {
+  ///Show single button ios Dialog
   static showDialogInfo({
     required BuildContext context,
     required String alertDescription,
@@ -43,6 +44,7 @@ class CustomDialog {
     );
   }
 
+  ///Show double button ios Dialog
   static Future<void> showConfirmDialog({
     required BuildContext context,
     required String alertDescription,
