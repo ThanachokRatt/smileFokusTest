@@ -1,6 +1,6 @@
 # smile_fokus_test
 
-A new smile fokus text project.
+A new smile fokus test project.
 
 ##  How to Build and Run
 
