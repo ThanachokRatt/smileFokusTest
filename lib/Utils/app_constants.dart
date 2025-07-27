@@ -14,6 +14,10 @@ class AppFonts {
   static const double superLarge = 28;
 }
 
+class AppSize {
+  static const double sizeIcon = 25.0;
+}
+
 class GetString {
   //Login screen
   static const String appTitle = "smileReward";
@@ -35,6 +39,16 @@ class GetString {
   //Dialog
   static const String alertTitle = "Alert";
   static const String close = "close";
+
+  //Home Screen
+  static const String errorMessage = "Something went wrong Please try again.";
+  static const String namePrefix = "คุณ";
+  static const String signOut = "Sign Out";
+  static const String points = "points";
+
+  //TabBar
+  static const String home = "Home";
+  static const String whistList = "Whist List";
 }
 
 // App Colors Const

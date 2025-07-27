@@ -7,6 +7,7 @@ import 'package:smile_fokus_test/components/custom_dialog.dart';
 import 'package:smile_fokus_test/components/custom_textField.dart';
 import 'package:smile_fokus_test/extension/text_styles.dart';
 import 'package:smile_fokus_test/screens/home/home_screen.dart';
+import 'package:smile_fokus_test/screens/main_tab/main_tab_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -35,9 +36,11 @@ class LoginScreen extends StatelessWidget {
                   );
                 }
                 if (state is LoginSuccessState) {
+                  _usernameController.text = '';
+                  _passwordController.text = '';
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => (HomeScreen())),
+                    MaterialPageRoute(builder: (context) => (MainTabScreen())),
                   );
                 }
               },
