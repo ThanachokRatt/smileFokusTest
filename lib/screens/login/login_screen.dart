@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
             child: BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
                 if (state is LoginErrorState) {
-                  showDialogInfo(
+                  CustomDialog.showDialogInfo(
                     context: context,
                     alertDescription: state.errorMessages,
                   );

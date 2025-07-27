@@ -39,6 +39,10 @@ class GetString {
   //Dialog
   static const String alertTitle = "Alert";
   static const String close = "close";
+  static const String confirm = "Confirm";
+  static const String cancel = "Cancel";
+  static const String confirmRedemption = "Confirm Reward Redemption";
+  static const String redemptionComplete = "Redemption Complete!";
 
   //Home Screen
   static const String errorMessage = "Something went wrong Please try again.";
@@ -49,6 +53,10 @@ class GetString {
   //TabBar
   static const String home = "Home";
   static const String whistList = "Whist List";
+
+  //Reward Detail
+  static const String detail = "Detail";
+  static const String redeem = "Redeem";
 }
 
 // App Colors Const

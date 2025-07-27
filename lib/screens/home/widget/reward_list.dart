@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smile_fokus_test/Utils/app_constants.dart';
+import 'package:smile_fokus_test/Utils/app_formatter.dart';
 import 'package:smile_fokus_test/extension/text_styles.dart';
 import 'package:smile_fokus_test/models/home/reward_item_model.dart';
+import 'package:smile_fokus_test/screens/reward_detail/reward_detail_screen.dart';
 
 class RewardList extends StatelessWidget {
   const RewardList({super.key, required this.modelList});
@@ -26,7 +28,12 @@ class RewardList extends StatelessWidget {
             points: model.rewardPoints,
             imageUrl: model.imageUrl,
             onPressedCard: () {
-              print('name = ${model.name} points = ${model.rewardPoints}');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => (RewardDetailScreen(model: model)),
+                ),
+              );
             },
             onPressedLike: () {
               print('like Id = ${model.id}');
@@ -113,7 +120,7 @@ class RewardCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Text(
-                "$points ${GetString.points}",
+                "${AppFormatter.formatNumber(points)} ${GetString.points}",
                 style: SetStyle.sarabunSemiBold(AppFonts.medium),
               ),
             ),
